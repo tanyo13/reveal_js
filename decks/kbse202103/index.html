@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>KBSE202103_tanabe</title>
+
+    <link rel="stylesheet" href="../../dist/reset.css">
+    <link rel="stylesheet" href="../../dist/reveal.css">
+    <link rel="stylesheet" href="../../dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="../../plugin/highlight/monokai.css" id="highlight-theme">
+
+    <style>
+      .reveal .slides {
+          text-align: left;
+      }
+      .reveal .slides section>* {
+          margin-left: 20pt;
+          margin-right: 0;
+      }
+    </style>
+    
+    <style>
+      /* by tanabe */
+      .reveal .mysmall { font-size: 50%; }
+      .reveal .myright { text-align: right; }
+      .reveal .mycenter { text-align: center; }
+      .reveal .myfs180 { font-size: 180%; }
+      .reveal .myfs120 { font-size: 120%; }
+    </style>
+
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+	<section>
+	  <div class="mycenter myfs180">
+	    <strong>試験問題の自動採点が行える<br>プログラミング言語の検討</strong>
+	  </div>
+	  <p style="margin-top: 80pt;"></p>
+	  <div class="mycenter myfs120">
+	    電子情報通信学会KBSE研究会<br> 2021年3月6日
+	  </div>
+	  <p style="margin-top: 40pt;"></p>
+	  <div class="mycenter myfs120">
+	    田辺良則 (鶴見大)，萩谷昌己 (東大)
+	  </div>
+	</section>
+
+	<section data-markdown="cont1.md"
+		 data-separator-vertical="^\r?\n===\r?\n"
+		 data-separator-notes="^Note:">
+	</section>
+
+      </div>
+    </div>
+
+    <script src="../../dist/reveal.js"></script>
+    <script src="../../plugin/notes/notes.js"></script>
+    <script src="../../plugin/markdown/markdown.js"></script>
+    <script src="../../plugin/highlight/highlight.js"></script>
+    <script src="../../plugin/math/math.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+	  width: 1280,
+	  height: 960,
+	  hash: true,
+	  slideNumber: true,
+
+    math: {
+      mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+      config: 'TeX-AMS_HTML-full',
+      // pass other options into `MathJax.Hub.Config()`
+      TeX: { Macros: { RR: "{\\bf R}" } }
+    },
+
+	  // Learn about plugins: https://revealjs.com/plugins/
+	  plugins: [ RevealMarkdown, RevealHighlight, RevealNotes,
+		     RevealMath
+		   ]
+      });
+    </script>
+  </body>
+</html>
