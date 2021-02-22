@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="../../dist/theme/white.css" id="theme">
 
     <!-- Theme used for syntax highlighted code -->
-    <link rel="stylesheet" href="../../plugin/highlight/monokai.css" id="highlight-theme">
+    <!-- <link rel="stylesheet" href="../../plugin/highlight/monokai.css" id="highlight-theme"> -->
+    <link rel="stylesheet" href="../../plugin/highlight/googlecode.css" id="highlight-theme">
 
     <style>
       .reveal .slides {
@@ -21,6 +22,10 @@
           margin-left: 20pt;
           margin-right: 0;
       }
+      .reveal pre code {
+	  max-height: 800px;
+      }
+
     </style>
     
     <style>
@@ -39,7 +44,7 @@
       <div class="slides">
 
 	<section>
-	  <div class="mycenter myfs180">
+	  <div class="mycenter myfs180" style="margin-top: 50mm;">
 	    <strong>試験問題の自動採点が行える<br>プログラミング言語の検討</strong>
 	  </div>
 	  <p style="margin-top: 80pt;"></p>
@@ -70,17 +75,19 @@
       // - https://revealjs.com/initialization/
       // - https://revealjs.com/config/
       Reveal.initialize({
-	  width: 1280,
-	  height: 960,
+	  width: 1600,
+	  height:1000,
 	  hash: true,
 	  slideNumber: true,
-
-    math: {
-      mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
-      config: 'TeX-AMS_HTML-full',
-      // pass other options into `MathJax.Hub.Config()`
-      TeX: { Macros: { RR: "{\\bf R}" } }
-    },
+	  center: false,
+	  transition: 'none',
+	  math: {
+	      mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+	      config: 'TeX-AMS_HTML-full',
+	      // pass other options into `MathJax.Hub.Config()`
+	      "HTML-CSS": { scale: 85 },
+	      TeX: { Macros: { RR: "{\\bf R}" } }
+	  },
 
 	  // Learn about plugins: https://revealjs.com/plugins/
 	  plugins: [ RevealMarkdown, RevealHighlight, RevealNotes,

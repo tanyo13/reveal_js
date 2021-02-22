@@ -6,7 +6,7 @@
 
 * 解答
 
-```
+```plaintext 
 var count, i;
 input a(10);
 count := 0;
@@ -16,8 +16,11 @@ repeat 10 {
     i += 1;
 }
 ```
+<!-- .element: style="font-size: 100%;" -->
+
 
 * 自動採点を行いたい．
+
 
 ---
 
@@ -80,7 +83,7 @@ repeat 10 {
     * 「嘘解法」
     * テストケースを増やせば誤判定を減らせるが，完全を期すことはできない．
 
-```
+```plaintext
 count := 0;
 i := 0;
 repeat 10 {
@@ -88,6 +91,7 @@ repeat 10 {
     i += 1;
 }
 ```
+<!-- .element: style="font-size: 100%;" -->
 
 ---
 
@@ -193,13 +197,11 @@ repeat 10 {
 
 ## 文法
 
-```
+<pre>
 プログラム = { 宣言 } , { 文 }
-宣言 = ( "var" | "input" )
-     , 変数宣言 , { "," , 変数宣言 } , ";"
+宣言 = ( "var" | "input" ) , 変数宣言 , { "," , 変数宣言 } , ";"
 変数宣言 = 変数 | ( 配列 , "(", 定数 , ")" )
-文 = ブロック | 入力文 | 代入文 | 条件文 | 繰返し文 
-   | break文 | 条件繰返し文 | assert文 | assume文 
+文 = ブロック | 入力文 | 代入文 | 条件文 | 繰返し文 | break文 | 条件繰返し文 | assert文 | assume文 
 ブロック = "{" , { 文 } , "}"
 入力文 = "input" , ( 変数 | 配列 )
 代入文 = ( 変数 | 配列要素 ) , ":=" , 表現 , ";"
@@ -211,17 +213,15 @@ break文 = "break" , ";"
 限定代入文 = ( 変数 | 配列要素 ) , "+=" , 定数 , ";"
 assert文 = "assert" , 拡張条件式
 assume文 = "assume" , 拡張条件式
-条件式 = 原子条件式 | "not" , 条件式 
-       | 条件式 , "or" , 条件式
+条件式 = 原子条件式 | "not" , 条件式 | 条件式 , "or" , 条件式
 原子条件式 = 表現 , "<" , 表現
 拡張条件式 = 条件式 | "forall" , 変数 , 条件式
-表現 = 定数 | 変数 | 配列要素
-     | "-" , 表現 | 表現 , "+" , 表現
+表現 = 定数 | 変数 | 配列要素 | "-" , 表現 | 表現 , "+" , 表現
 配列要素 = 配列 , "[" , 表現 , "]"
 定数 = ? 任意の整数 ?
 変数 = ? 任意の識別子 ?
 配列 = ? 任意の識別子 ?
-```
+</pre>
 
 ---
 
@@ -231,8 +231,8 @@ assume文 = "assume" , 拡張条件式
 <li> 演算は足し算のみ．掛け算不可．
   <ul>
     <li> 定数倍は書ける．(足し算の繰返しだから)
-    <li> `x := y * 10;`  ... 可
-    <li> `x := y * y;` ... 不可
+    <li> <code>x := y * 10;</code> &nbsp; ... 可
+    <li> <code>x := y * y;</code> &nbsp;  ... 不可
   </ul>
 
 <li> 繰返し回数指定は定数のみ．
@@ -249,7 +249,7 @@ repeat 10 {
   * 不可
 
 <pre>
-input(n)
+input n;
 i := 0;
 repeat n {
     x += i;
@@ -267,7 +267,7 @@ repeat n {
 * while 文の強い制限: ループ内には，
   変数を定数だけ増やすことしか書けない．
   
-```
+```plaintext
 while (x > 0 and (not y <= z)) {
     x += 5;  // 可
 	x += i;  // 不可
@@ -276,6 +276,7 @@ while (x > 0 and (not y <= z)) {
 	}
 }
 ```
+<!-- .element: style="font-size: 100%;" -->
 
 ---
 
@@ -283,7 +284,7 @@ while (x > 0 and (not y <= z)) {
 
 * 定数による整数の割算は記述できる
 
-```
+```plaintext
 assume (a > 0);
 q := 0;
 r := a;
@@ -293,6 +294,7 @@ while (r >= 5) {
 }
 assert (a == 5 * q + r and 0 <= r and r < 5);
 ```
+<!-- .element: style="font-size: 100%;" -->
 
 * 初学者が学ぶプログラムで記述できるものもある．
   * 線形探索
@@ -325,7 +327,7 @@ assume文，assert文を適切に追加して検証する．
 
 * 例: 長さ6の整列済み配列aで，要素xの添字 (なければ-1) をidxに格納せよ．
 
-```
+```plaintext
 input a(6), x;
 b := a;
 
@@ -343,6 +345,7 @@ if (idx == -1) {
 		j += 1;  }}
 else {  assert (b[idx] == x);  }
 ```
+<!-- .element: style="font-size: 80%;" -->
 
 ---
 
@@ -350,7 +353,7 @@ else {  assert (b[idx] == x);  }
 
 * 例: 長さ6の配列aの正の数の個数をcountに格納せよ．
 
-```
+```plaintext
 input a(6);
 
 // 正解プログラム
@@ -365,6 +368,7 @@ repeat 6 {
 // 比較
 assert (count == cmp);
 ```
+<!-- .element: style="font-size: 80%;" -->
 
 ---
 
@@ -373,7 +377,7 @@ assert (count == cmp);
 * 記号実行 [9] による．
 
 <div>
-<img src="symb.jpg" width="70%">
+<img src="symb.jpg" width="60%">
 </div>
 
 
@@ -480,8 +484,8 @@ repeat 10 { // 配列長が10
   * 短冊型では問題は起きにくい(?)
 * 配列公理 [11]
   * $\forall a, i, x.\; \texttt{select}(\texttt{store}(a, i, x), i) = x$
-  * $\forall a, i_1, i_2, x.\; i_1 \neq i_2 \Rightarrow$ <br/>
-    $\qquad \texttt{select}(\texttt{store}(a, i_1, x), i_2)
+  * $\forall a, i_1, i_2, x.\; i_1 \neq i_2 \Rightarrow
+	\texttt{select}(\texttt{store}(a, i_1, x), i_2)
 	 = \texttt{select}(a, i_2)$
   * $\texttt{select}(a, i)$ ... 配列$a$の添字$i$の位置の要素
   * $\texttt{store}(a, i, x)$ ... 配列$a$の添字$i$の要素を$x$に変更した配列
