@@ -1,4 +1,4 @@
-## プログラムの試験
+## プログラミングの試験
 
 * 問題
     * 入力で与えられる配列 a の要素のうち，正の数を数えて，
@@ -25,7 +25,7 @@ repeat 10 {
 
 * 2022年から高校で新学習指導要領開始
 * すべての高校生がプログラミングを学ぶ
-  * 情報科: 「情報I」必修，「情報II」選択
+  * 情報科: 「情報I」必履修，「情報II」選択
   * 「情報I」: プログラミングを含む
 
 <p></p>
@@ -287,7 +287,7 @@ while (x > 0 and (not y <= z)) {
 assume (a > 0);
 q := 0;
 r := a;
-while (r > 0) {
+while (r >= 5) {
     r -= 5;
 	q += 1;
 }
@@ -391,7 +391,7 @@ assert (count == cmp);
   * $\forall t.\\, 0 \leq t \to P(t)$ が充足可能なら，このループが終了しない可能性がある
     と報告をして，解析を終了する．
   * そうでないときは，新しい (論理式の意味の) 変数 $t$ を導入し，
-    以下を実行して，次の文に進む．
+    以下を実行して，次の文に進む．$t$は繰返し回数を表している．
     * $\neg P(t) \land \forall t'.\\, 0 \leq t' \land t' < t \to P(t')$
 	  を経路条件に加える．
 	* $v_i$ の値を，$a_i + t \cdot d_i$ に変更する．
@@ -476,8 +476,8 @@ repeat 10 { // 配列長が10
   * 短冊型では問題は起きにくい(?)
 * 配列公理 [11]
   * $\forall a, i, x.\; \texttt{select}(\texttt{store}(a, i, x), i) = x$
-  * $\forall a, i_1, i_2, x.\; i_1 \neq i_2 \Rightarrow
-     \texttt{select}(\texttt{store}(a, i_1, x), i_2)
+  * $\forall a, i_1, i_2, x.\; i_1 \neq i_2 \Rightarrow$ <br/>
+    $\qquad \texttt{select}(\texttt{store}(a, i_1, x), i_2)
 	 = \texttt{select}(a, i_2)$
   * $\texttt{select}(a, i)$ ... 配列$a$の添字$i$の位置の要素
   * $\texttt{store}(a, i, x)$ ... 配列$a$の添字$i$の要素を$x$に変更した配列
