@@ -154,11 +154,13 @@ repeat 10 {
 
 ---
 
+## 短冊型解答例
+
 <img src="tanzaku_ans.jpg">
 
 ---
 
-#### 正解は1つではない
+## 正解は1つではない
 
 <img src="not_unique.jpg" width="40%">
 
@@ -239,20 +241,20 @@ assume文 = "assume" , 拡張条件式
 
   * 可
 
-<pre>
+<pre style="font-size: 80%;">
 i := 0;
 repeat 10 {
-    x += i;
+    if (i < 5) { x += i; }
 	i += 1; }
 </pre>
 
   * 不可
 
-<pre>
+<pre style="font-size: 80%;">
 input n;
 i := 0;
 repeat n {
-    x += i;
+    if (i < 5) { x += i; }
 	i += 1; }
 </pre>
 
@@ -426,10 +428,104 @@ assert (count == cmp);
 
 ---
 
+## 実験1. - 正の数のカウント
 
-## 実験
+```plaintext
+# サイズ20の場合
+var count, i;  input a(20);
 
-TBW
+# 受験者の解答例 (不正解)
+count := 0;
+i := 0;
+repeat 20 {
+    if (a[i] > 0 and a[i] != 19937) { count += 1; }
+    i += 1; }
+        
+# 標準解答
+cmp := 0;
+i := 0;
+repeat 20 {
+    if (a[i] > 0) { cmp += 1; }
+    i += 1;
+}
+                
+# 比較
+assert (count == cmp);
+```
+
+| サイズ | 平均実行時間(秒) |
+|---|---|
+| 5 | 0.276 |
+| 10 | 0.654 |
+| 20 | 1.970 |
+
+
+---
+
+## 実験2. - 二分探索
+
+```plaintext
+# サイズ(配列長15, 繰返数4) の場合
+var ans, left, right, mid, i;
+input a(15), x;
+assume(0 <= a[0]);
+i := 0; repeat 14 {assume (a[i] <= a[i + 1]); i += 1;}
+
+# 受験者の解答例 (正解)
+ans := -1;
+if (x >= a[0]) {
+    left := 0; right := 15;
+    repeat 4 {
+        if (left == right) {break;}
+        mid := (left + right) / 2;
+        if (a[mid] == x) { ans := mid; break; }
+        if (a[mid] > x) {right := mid;} else {left := mid;} }}
+
+# 満たすべき性質のチェック
+if (ans != -1) { assert (a[ans] == x); }
+else { i := 0; repeat 15 { assert (a[i] != x); i += 1; }}
+```
+
+| サイズ | 平均実行時間(秒) |
+|---|---|
+| (3,2) | 0.913 |
+| (7,3) | 5.69 |
+| (15,4) | 59.6 |
+
+---
+
+## 実験3. - バブルソート
+
+```plaintext
+# サイズ5の場合
+var i, j, tmp, b(5);  input a(5);
+i := 0;  repeat 5 {b[i] := a[i]; i += 1; }
+
+# 受験者の解答例 (正解)
+i := 0;  repeat 4 {
+    j := 0; repeat 4 {
+        if (j < 4 - i) {
+            if (a[j] > a[j + 1]) { tmp := a[j];  a[j] := a[j + 1];  a[j + 1] := tmp; }}
+        j := j + 1; }
+    i := i + 1; }
+
+# 標準解答
+i := 0; repeat 4 {
+    j := 3; repeat 4 {
+        if (j < i) { break; }
+        if (b[j] > b[j + 1]) { tmp := b[j]; b[j] := b[j + 1]; b[j + 1] := tmp; }
+        j := j - 1; }
+    i := i + 1; }
+
+# 比較
+i := 0; repeat 5 { assert(a[i] == b[i]); i += 1; }
+```
+
+| サイズ | 平均実行時間(秒) |
+|---|---|
+| 3 | 0.643 |
+| 4 | 5.66 |
+| 5 | 77.7 |
 
 ---
 
