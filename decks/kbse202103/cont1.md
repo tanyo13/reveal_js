@@ -428,6 +428,12 @@ assert (count == cmp);
 
 ---
 
+<style>
+  .reveal .tblcolright td {
+    text-align: right;
+  }
+</style>
+
 ## 実験1. - 正の数のカウント
 
 ```plaintext
@@ -458,7 +464,7 @@ assert (count == cmp);
 | 5 | 0.276 |
 | 10 | 0.654 |
 | 20 | 1.970 |
-
+<!-- .element: class="tblcolright" -->
 
 ---
 
@@ -486,11 +492,12 @@ if (ans != -1) { assert (a[ans] == x); }
 else { i := 0; repeat 15 { assert (a[i] != x); i += 1; }}
 ```
 
-| サイズ | 平均実行時間(秒) |
-|---|---|
-| (3,2) | 0.913 |
-| (7,3) | 5.69 |
-| (15,4) | 59.6 |
+| 配列長 | 繰返数 | 平均実行時間(秒) |
+|---|---|---|
+| 3  |  2 | 0.913 |
+| 7  |  3 | 5.69 |
+| 15 | 4 | 59.6 |
+<!-- .element: class="tblcolright" -->
 
 ---
 
@@ -526,6 +533,7 @@ i := 0; repeat 5 { assert(a[i] == b[i]); i += 1; }
 | 3 | 0.643 |
 | 4 | 5.66 |
 | 5 | 77.7 |
+<!-- .element: class="tblcolright" -->
 
 ---
 
@@ -559,15 +567,18 @@ while (right - left > 1) {
     mid = (right + left) / 2
 	if (p(mid)) ....
 </pre>
+<!-- .element: style="font-size: 100%;" -->
 
   <li> この言語での記述
 
 <pre>
-repeat 10 { // 配列長が10
+repeat 10 { // 配列長が 2**10 - 1 まで
     if (right - left <= 1) { break; }
 	mid = (right + left) / 2
 	if (p(mid)) ....
 </pre>
+<!-- .element: style="font-size: 100%;" -->
+
 </ul>
 </ul>
 
