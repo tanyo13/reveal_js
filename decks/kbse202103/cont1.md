@@ -121,6 +121,7 @@ repeat 10 {
 * 準備: Presburger算術
 * 提案言語
 * 採点の手法
+* 実験
 * 議論
 
 ---
@@ -327,10 +328,10 @@ assert (a == 5 * q + r and 0 <= r and r < 5);
 Presburger論理式 (とコード片) で表現できる場合は，
 assume文，assert文を適切に追加して検証する．
 
-* 例: 長さ6の整列済み配列aで，要素xの添字 (なければ-1) をidxに格納せよ．
+* 例: 長さ5の整列済み配列aで，要素xの添字 (なければ-1) をidxに格納せよ．
 
 ```plaintext
-input a(6), x;
+input a(5), x;
 b := a;
 
 i := 0;
@@ -588,7 +589,6 @@ repeat 10 { // 配列長が 2**10 - 1 まで
 
 * 定数長配列しか扱えない．
   * その長さ (以下) のときにしか動作しないプログラムを許容してしまう．
-  * 短冊型では問題は起きにくい(?)
 * 配列公理 [11]
   * $\forall a, i, x.\; \texttt{select}(\texttt{store}(a, i, x), i) = x$
   * $\forall a, i_1, i_2, x.\; i_1 \neq i_2 \Rightarrow
