@@ -70,6 +70,9 @@ repeat 10 {
 * 競技プログラミングで，広く用いられている．
   * 例: https://atcoder.jp/contests/agc049/submissions/18093458
 
+<p style="margin: 40pt;"></p>
+<img src="testsuite1.jpg" width="40%">
+
 ---
 
 ## テストスイート方式
@@ -92,6 +95,10 @@ repeat 10 {
 }
 ```
 <!-- .element: style="font-size: 100%;" -->
+
+<img style="float: right;" src="testsuite2.jpg" width="30%">
+
+
 
 ---
 
