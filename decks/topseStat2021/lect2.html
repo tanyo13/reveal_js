@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>TopSE Statistics</title>
+
+    <link rel="stylesheet" href="../../dist/reset.css">
+    <link rel="stylesheet" href="../../dist/reveal.css">
+    <link rel="stylesheet" href="../../dist/theme/white.css" id="theme">
+
+    <!-- Theme used for syntax highlighted code -->
+    <!-- <link rel="stylesheet" href="../../plugin/highlight/monokai.css" id="highlight-theme"> -->
+    <link rel="stylesheet" href="../../plugin/highlight/googlecode.css" id="highlight-theme">
+
+    <style>
+      .reveal .slides {
+          text-align: left;
+      }
+      .reveal .slides section>* {
+          margin-left: 20pt;
+          margin-right: 0;
+      }
+      .reveal h1 {
+          margin-top: 300px;
+	  font-size: 300%;
+      }
+      .reveal pre code {
+	  max-height: 800px;
+      }
+      .reveal .footer {
+	  position: absolute;
+	  bottom: 0.5em;
+	  left: 0.5em;
+	  font-size: 90%;
+	  color: #a0a0a0;
+      }
+      .reveal li {
+	  margin-top: 0.25em;
+          /* margin-block-end: 0.3em; */
+      }
+
+
+    </style>
+    
+    <style>
+      /* by tanabe */
+      .reveal .fixme { font-size: 120%; color: red; }
+      .reveal .mysmall { font-size: 50%; }
+      .reveal .myright { text-align: right; }
+      .reveal .mycenter { text-align: center; }
+      .reveal .myfs180 { font-size: 180%; }
+      .reveal .myfs120 { font-size: 120%; }
+    </style>
+
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="footer">
+	&nbsp;
+      </div>
+      <div class="slides">
+	<section>
+	  <div class="mycenter myfs180" style="margin-top: 50mm;">
+	    <strong>統計学と最適化 (第2回)<br>講義資料</strong>
+	  </div>
+	  <p style="margin-top: 80pt;"></p>
+	  <div class="mycenter myfs120">
+	    2021年4月3日
+	  </div>
+	  <p style="margin-top: 40pt;"></p>
+	  <div class="mycenter myfs120">
+	    田辺良則 (鶴見大 / NII)
+	  </div>
+	  <!--
+	  <p style="margin-top: 100pt;"></p>
+	  <div class="mycenter myfs180">
+	    <code>https://bit.ly/3aFBnEe</code>
+	  </div>
+	  -->
+	</section>
+
+	<section data-markdown="cont2.md"
+		 data-separator-vertical="^\r?\n===\r?\n"
+		 data-separator-notes="^Note:">
+	</section>
+	
+      </div>
+    </div>
+
+    <script src="../../dist/reveal.js"></script>
+    <script src="../../plugin/notes/notes.js"></script>
+    <script src="../../plugin/markdown/markdown.js"></script>
+    <script src="../../plugin/highlight/highlight.js"></script>
+    <script src="../../plugin/math/math.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+	  width: 1600,
+	  height:1000,
+	  hash: true,
+	  slideNumber: true,
+	  center: false,
+	  transition: 'none',
+	  mouseWheel: true,
+	  math: {
+	      mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+	      config: 'TeX-AMS_HTML-full',
+	      // pass other options into `MathJax.Hub.Config()`
+	      "HTML-CSS": { scale: 85 },
+	      TeX: { Macros: { RR: "{\\bf R}" } }
+	  },
+
+	  // Learn about plugins: https://revealjs.com/plugins/
+	  plugins: [ RevealMarkdown, RevealHighlight, RevealNotes,
+		     RevealMath
+		   ]
+      });
+    </script>
+  </body>
+</html>
