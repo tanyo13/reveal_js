@@ -95,7 +95,7 @@ quoted from (an outdated) JPF website: http://javapathfinder.sourceforge.net
 ## Environment for Exercises
 
 * Installation instructions for JPF/SPF are linked from the LMS.
-* Download `svt20proj.zip` from the LMS
+* Download `svt21proj.zip` from the LMS
   and extract files.
 * Add a line to your `site.properties` file:
 ```
@@ -201,7 +201,10 @@ proj-top = /full/path/to/svt20proj
 
 <img src="figs/diningPhil.png" width="40%" alt="dining philosophers">
 <br/>
-<small>quoted from [Wikipedia](https://en.wikipedia.org/wiki/Dining_philosophers_problem).  (C) Benjamin D. Esham, CC BY-SA 3.0</small>
+<small>Quoted from 
+<a href="https://en.wikipedia.org/wiki/Dining_philosophers_problem"
+>Wikipedia</a>.
+(C) Benjamin D. Esham, CC BY-SA 3.0</small>
 
 ---
 

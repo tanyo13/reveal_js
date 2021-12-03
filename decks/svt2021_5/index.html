@@ -4,22 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>SVT2020Lect5</title>
+    <title>KBSE202103_tanabe</title>
 
-    <link rel="stylesheet" href="/css/reveal.css">
-    <link rel="stylesheet" href="/css/theme/white.css">
+    <link rel="stylesheet" href="../../dist/reset.css">
+    <link rel="stylesheet" href="../../dist/reveal.css">
+    <link rel="stylesheet" href="../../dist/theme/white.css" id="theme">
 
-    <!-- Theme used for syntax highlighting of code -->
-    <link rel="stylesheet" href="/lib/css/zenburn.css">
-
-    <!-- Printing and PDF exports -->
-    <script>
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
-    </script>
+    <!-- Theme used for syntax highlighted code -->
+    <!-- <link rel="stylesheet" href="../../plugin/highlight/monokai.css" id="highlight-theme"> -->
+    <link rel="stylesheet" href="../../plugin/highlight/googlecode.css" id="highlight-theme">
 
     <style>
       .reveal .slides {
@@ -29,8 +22,28 @@
           margin-left: 20pt;
           margin-right: 0;
       }
+      .reveal pre code {
+	  max-height: 800px;
+      }
+      .reveal .footer {
+	  position: absolute;
+	  bottom: 0.5em;
+	  left: 0.5em;
+	  font-size: 90%;
+	  color: #a0a0a0;
+      }
+
     </style>
     
+    <style>
+      /* by tanabe */
+      .reveal .mysmall { font-size: 50%; }
+      .reveal .myright { text-align: right; }
+      .reveal .mycenter { text-align: center; }
+      .reveal .myfs180 { font-size: 180%; }
+      .reveal .myfs120 { font-size: 120%; }
+    </style>
+
   </head>
 
   <body>
@@ -39,43 +52,46 @@
 	<section>
 	  <h1>Java PathFinder</h1>
 	  <h3>Software Verification and Testing #5</h3>
-	  <h3>Jan 08, 2021</h3>
+	  <h3>Jan 07, 2022</h3>
 	  <h4>Tanabe Yoshinori<br/> (Tsurumi Univ. / National Institute of Informatics)</h4>
 	</section>
-	<section data-markdown="cont1.md"></section>
+
+	<section data-markdown="cont1.md"
+		 data-separator-vertical="^\r?\n===\r?\n"
+		 data-separator-notes="^Note:">
+	</section>
+
       </div>
     </div>
 
-    <script src="/lib/js/head.min.js"></script>
-    <script src="/js/reveal.js"></script>
-
+    <script src="../../dist/reveal.js"></script>
+    <script src="../../plugin/notes/notes.js"></script>
+    <script src="../../plugin/markdown/markdown.js"></script>
+    <script src="../../plugin/highlight/highlight.js"></script>
+    <script src="../../plugin/math/math.js"></script>
     <script>
-      // More info about config & dependencies:
-      // - https://github.com/hakimel/reveal.js#configuration
-      // - https://github.com/hakimel/reveal.js#dependencies
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
       Reveal.initialize({
-	  width: 1280,
-	  height: 960,
+	  width: 1600,
+	  height:1000,
+	  hash: true,
 	  slideNumber: true,
-	  center: true,
-	  mouseWheel: false,
-	  history: true,
-          hash: true,
-
+	  center: false,
+	  transition: 'none',
 	  math: {
-	      mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
-	      config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+	      mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+	      config: 'TeX-AMS_HTML-full',
 	      // pass other options into `MathJax.Hub.Config()`
-	      // TeX: { Macros: macros }
-	},
+	      "HTML-CSS": { scale: 85 },
+	      TeX: { Macros: { RR: "{\\bf R}" } }
+	  },
 
-	  dependencies: [
-	      { src: '/plugin/markdown/marked.js' },
-	      { src: '/plugin/markdown/markdown.js' },
-	      { src: '/plugin/notes/notes.js', async: true },
-	      { src: '/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-	      { src: '/plugin/math/math.js', async: true }
-	  ]
+	  // Learn about plugins: https://revealjs.com/plugins/
+	  plugins: [ RevealMarkdown, RevealHighlight, RevealNotes,
+		     RevealMath
+		   ]
       });
     </script>
   </body>
