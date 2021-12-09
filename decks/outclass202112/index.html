@@ -42,6 +42,8 @@
       .reveal .mycenter { text-align: center; }
       .reveal .myfs180 { font-size: 180%; }
       .reveal .myfs120 { font-size: 120%; }
+      .reveal .myhl { font-size: 120%; text-align: center; color: blue; }
+      .reveal .myblue {color: blue; }
     </style>
 
   </head>
@@ -94,13 +96,15 @@
       // - https://revealjs.com/initialization/
       // - https://revealjs.com/config/
       Reveal.initialize({
-	  width: 1600,
-	  height:1000,
-	  hash: true,
-	  slideNumber: true,
-	  center: false,
-	  transition: 'none',
-	  math: {
+	   // width: 1600,
+	   // height:1000,
+        width: 1200,
+        height: 750,
+	hash: true,
+	slideNumber: true,
+	center: true,
+	transition: 'none',
+	math: {
 	      mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
 	      config: 'TeX-AMS_HTML-full',
 	      // pass other options into `MathJax.Hub.Config()`
