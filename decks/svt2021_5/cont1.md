@@ -16,7 +16,7 @@
 	  from source code / binaries.
     * <span style="color:red;">JPF</span>, 
 	  Static Driver Verifier (SLAM), CHESS, ...
-    * Easily suffered from the _state explosion problem_.
+    * Often suffered from the _state explosion problem_.
 
 ---
 
@@ -33,7 +33,6 @@
 	* Compares two states for identity
 * website: https://github.com/javapathfinder/jpf-core/wiki
 * Extensions by contributors such as Symbolic Execution.
-    * We cover this in Lecture 6.
 
 
 ---
@@ -55,6 +54,17 @@
 
 ---
 
+## Do you remember ...
+
+* Transition Systems
+
+![TS2](figs/from4TS2.jpg)
+
+* JPF automatically constructs ttansition systems from Java code.
+
+
+---
+
 ## JPF Configuration
 
 ![JPF Configuraion](figs/jpfConfig.png)
@@ -73,7 +83,7 @@ quoted from (an outdated) JPF website: http://javapathfinder.sourceforge.net
 
 ![How JPF Runs1](figs/howJPFRuns1.jpg)
 
-* JPF has its own JVM.  It interprets class files.
+* JPF has its own Java Virtual Machine (JVM).  It interprets class files.
 * It can go forward, stop, go backward, etc.; for a specified thread.
 
 
@@ -83,7 +93,8 @@ quoted from (an outdated) JPF website: http://javapathfinder.sourceforge.net
 
 ![How JPF Runs2](figs/howJPFRuns2.jpg)
 
-* Search Engine builds a TS, by getting info from JVM.
+* Search Engine builds a transition system, 
+  by getting information from JVM.
 * JVM runs Java bytecode and builds states.
 
 ---
@@ -94,19 +105,19 @@ quoted from (an outdated) JPF website: http://javapathfinder.sourceforge.net
 
 ## Environment for Exercises
 
-* Installation instructions for JPF/SPF are linked from the LMS.
-* Download `svt21proj.zip` from the LMS
-  and extract files.
+* [Installation instructions for JPF/SPF](https://is-trm.net/lect/svt-21/lectNote/install/jpf/). Also linked from the LMS.
+* Download [svt21proj.zip](https://is-trm.net/lect/svt-21/lectNote/material/svt21-jpf.zip) and extract files in it.
 * Add a line to your `site.properties` file:
 ```
-proj-top = /full/path/to/svt20proj
+proj-top = /full/path/to/your/directory/of/svt21proj
 ```
     * Use slashes instead of backslashes even on MS Windows.
-* Comment the following line out for Lecture 5:
+* Comment the following line out for JPF.
 ```
 # extensions = ${jpf-core},${jpf-symbc}
 ```
-    * This line is only needed when Symbolic PathFinder is used.
+    * Make this line effective again when you run
+      Symbolic PathFinder.
 
 ---
 
@@ -119,8 +130,8 @@ proj-top = /full/path/to/svt20proj
 ## Creating threads
 
 * To make a thread:
-    * Defines a derived class of class `Thread`.
-    * Redefines method `run`.
+    * Define a derived class of class `Thread`.
+    * Redefine method `run`.
 * Method `start` creates and starts a thread that runs the contents
   of method `run`.
 * Sample code: `MyThread1.java` (in directory `javaRev`)
@@ -171,7 +182,7 @@ proj-top = /full/path/to/svt20proj
 
 * Read the source files in directory `prodCons`,
   and replace the busy loop with the code containing wait() and notifyAll().
-* Answers are given in directories with the name `'*-answer'`.
+* Answers are given in directories with name `'*-answer'`.
 
 ---
 
@@ -251,7 +262,9 @@ and you will get an error trace (counterexample) as expected.
   you should assume that the execution of the
   shown line 
   <span style="color: red;">has not yet been completed</span>.
-* When in doubt, you can check executed bytecodes by:
+* When in doubt, you can add the following line in `*.jpf` file
+  to have JPF print executed bytecodes.
+
 ```
 report.console.show_code=true
 ```
@@ -270,13 +283,10 @@ See `src/intro/diningPhil.log`.
 ### Exercise
 
 * In dining philosophers, can we avoid deadlocks
-  by changing one of the philosopher's ordering to
-  Take Right - Take Left?  
-  Will it be different if
-  we change two instead of one when there are more philosophers than three?
-  What is the necessary and sufficient condition of the order to
-  avoid deadlocks?  Confirm it with JPF.
-
+  by changing the order in which each philosopher takes forks?
+* If there can be four or more philosophers,
+  what is the necessary and sufficient condition on the order
+  to avoid deadlocks?  Examine it with JPF.
 
 ---
 
@@ -336,13 +346,262 @@ assert p : m
 
 * Tasks:
     1. Find a path where a deadlock occurs, and explain why it happens.
-	   If you have run JPF against the code, it is a good idea to
+	   If you have run JPF with the code, it is a good idea to
 	   attach the error trace from JPF to your report.
 	2. Modify the program so that deadlocks do not occur.
 	   Try to confirm it with JPF.  (You can still submit a report
 	   if you fail to do that.)
-	   Note that there may be a different issue than what you 
+	   Note that there may be a different issue from what you 
 	   first detected.
 
 <!-- .slide: id="working" -->
 
+---
+
+# Symbolic PathFinder
+
+---
+
+## A Reminder
+
+Slide 23 of Symblic-Execution.pdf:
+
+![Assignment #2](spf_figs/rep_opt.jpg)
+
+
+---
+
+## Symbolic Execution
+
+![Symbolic Execution](spf_figs/fig4.jpg)
+
+<span style="font-size: 60%">(cited from [Pasareanu13])</span>
+
+
+---
+
+## Model Checking and Symbolic Execution
+
+* Both enumerate paths and explore all of them
+* In symbolic execution:
+  * Computation should be done symbolically
+  * Satisfiability checking is needed to check if
+    a path is feasible
+
+
+&nbsp;
+
+Model Checker + Symbolic Calculation + Sat Checker = Symbolic Execution Analyzer
+
+
+---
+
+
+## Symbolic PathFinder
+
+* Java PathFinder (JPF, a model checker) + Symbolic Execution
+    * modules: jpf-core + jpf-symbc 
+* JPF has a dedicated Java virtual machine
+* SPF replaces the concrete bytecode interpretation with a
+  symbolic interpretation
+* Symbolic information is stored in attributes, which JPF provides
+  for storing metadata.
+* SPF uses JPF's mechanism to systematically generate execution paths.
+
+<span style="font-size: 60%">
+[Pasareanu13] Pasareanu et al.
+Symbolic PathFinder: integrating symbolic execution 
+with model checking for Java bytecode analysis.
+<i>Automated Software Engineering</i>, vol. 20, 2013.  391-425 
+</span>
+
+---
+
+## SPF Overview
+
+![SPF Overview](spf_figs/fig1.jpg)
+
+<span style="font-size: 60%">(cited from [Pasareanu13])</span>
+
+---
+
+## Decision Procedures Used
+
+* Z3
+    * A SMT solver
+    * This is the default solver.
+* Choco
+    * for integer/real constraints
+	* pure Java
+* IASolver
+    * Interval Arighmetic Constraint Solver
+	* pure Java
+* CVC3
+    * for real/integer linear arithmetic
+
+---
+
+## Example
+
+```
+public class BinarySearch {
+	
+	static boolean search(int[] mylist, int myitem) {
+		int left = 0;
+		int right = mylist.length - 1;
+		while (left <= right) {
+			int mid = (left + right) / 2;
+			if (myitem == mylist[mid]) return true;
+			if (myitem <  mylist[mid]) right = mid - 1;
+			else                       left  = mid + 1;
+		}
+		return false;
+	}
+	
+	static boolean driver(int i, int a0, int a1, int a2, int a3, int a4, int a5, int a6) {
+		if ((a0 < a1) && (a1 < a2) && (a2 < a3) && (a3 < a4) && (a4 < a5) && (a5 < a6)) {
+			int[] list = {a0, a1, a2, a3, a4, a5, a6};
+			boolean b = search(list, i);
+			boolean exp = (i == a0) || (i == a1) || (i == a2) || (i == a3) || (i == a4) || (i == a5) || (i == a6);
+			if (b == exp) {
+				return true;
+			}else {
+				assert(false);
+				return false;
+			}
+		}else {
+			return true;
+		}
+	}
+
+	public static void main(String[] args) {
+		boolean b = driver(0,0,1,2,3,4,5,6);
+		System.out.print(b);
+	}
+}
+```
+
+---
+
+## Results (Test Cases)
+
+```C
+Inputs: i_1_SYMINT,a0_2_SYMINT,a1_3_SYMINT,a2_4_SYMINT,a3_5_SYMINT,a4_6_SYMINT,a5_7_SYMINT,a6_8_SYMINT
+
+BinarySearch.driver(3,0,1,2,3,4,5,6)  --> Return Value: 1
+BinarySearch.driver(1,0,1,2,3,4,5,6)  --> Return Value: 1
+BinarySearch.driver(0,0,1,2,3,4,5,6)  --> Return Value: 1
+BinarySearch.driver(0,1,2,3,4,5,6,7)  --> Return Value: 1
+BinarySearch.driver(1,0,2,3,4,5,6,7)  --> Return Value: 1
+BinarySearch.driver(2,0,1,2,3,4,5,6)  --> Return Value: 1
+BinarySearch.driver(2,0,1,3,4,5,6,7)  --> Return Value: 1
+BinarySearch.driver(3,0,1,2,4,5,6,7)  --> Return Value: 1
+BinarySearch.driver(5,0,1,2,3,4,5,6)  --> Return Value: 1
+BinarySearch.driver(4,0,1,2,3,4,5,6)  --> Return Value: 1
+BinarySearch.driver(4,0,1,2,3,5,6,7)  --> Return Value: 1
+BinarySearch.driver(5,0,1,2,3,4,6,7)  --> Return Value: 1
+BinarySearch.driver(6,0,1,2,3,4,5,6)  --> Return Value: 1
+BinarySearch.driver(6,0,1,2,3,4,5,7)  --> Return Value: 1
+BinarySearch.driver(7,0,1,2,3,4,5,6)  --> Return Value: 1
+BinarySearch.driver(-9223372036854775808(don't care),0,1,2,3,4,5,0)  --> Return Value: 1
+BinarySearch.driver(-9223372036854775808(don't care),0,1,2,3,4,0,-9223372036854775808(don't care))  --> Return Value: 1
+BinarySearch.driver(-9223372036854775808(don't care),0,1,2,3,0,-9223372036854775808(don't care),-9223372036854775808(don't care))  --> Return Value: 1
+BinarySearch.driver(-9223372036854775808(don't care),0,1,2,0,-9223372036854775808(don't care),-9223372036854775808(don't care),-9223372036854775808(don't care))  --> Return Value: 1
+BinarySearch.driver(-9223372036854775808(don't care),0,1,0,-9223372036854775808(don't care),-9223372036854775808(don't care),-9223372036854775808(don't care),-9223372036854775808(don't care))  --> Return Value: 1
+BinarySearch.driver(-9223372036854775808(don't care),0,0,-9223372036854775808(don't care),-9223372036854775808(don't care),-9223372036854775808(don't care),-9223372036854775808(don't care),-9223372036854775808(don't care))  --> Return Value: 1
+```
+
+---
+
+## Demo 
+
+* Bugs are detected with generated test cases.
+
+---
+
+## Instruction Factory
+
+![Instruction Factory](spf_figs/fig2.jpg)
+
+<span style="font-size: 60%">(cited from [Pasareanu13])</span>
+
+---
+
+## Concrete and Symbolic Code for IADD
+
+![Instruction Factory](spf_figs/fig3.jpg)
+
+<span style="font-size: 60%">(cited from [Pasareanu13])</span>
+
+---
+
+## Concrete and Symbolic Code for IFGE
+
+![Instruction Factory](spf_figs/fig5.jpg)
+
+<span style="font-size: 60%">(cited from [Pasareanu13])</span>
+
+
+---
+
+## Mixed Concrete-Symbolic Solving
+
+* Symbolic execution may fail due to 
+    * incompleteness in the decision procedure
+	* inability to handle external library calls
+* Mixed concrete-symbolic solving
+    * uninterpreted functions
+	* delayed execution
+* Incomplete.  May fail to judge as "satisfiable"
+
+---
+
+### Example
+
+<img src="spf_figs/fig9.jpg" width="60%">
+
+* Assume hash(1) = 10, hash(2) = 20, hash(4) = 40.
+* Path Conditions (PC) for S0-S3: `X>3`, `Y>10`, `Y=hash(X)`
+* Divides PC into two:
+    * SimplePC: `X>3`, `Y>10` / ComplexPC: `Y=hash(X)`
+* Solves the Simple PC to get `X=4`
+* Delayed execution generates new PC: `Y=40`.
+* Solves the mixed PC `X>0`, `Y>10`, `Y=40`, which is satisfiable.
+
+---
+
+### Heuristics
+
+* Changing [6] to [7] makes things difficult:
+  * SimplePC: `X>0`, `Y>10` / ComplexPC: `Y=hash(X)`
+  * The solver returns `X=1` for SimplePC and hash(1) = 10
+* Heuristics
+  * Generates multiple solutions for simplePC
+    * up to a user-specified limit
+  * User-supplied partitions of the domain of an uninterpreted function
+  * Random values 
+
+---
+
+## Summary
+
+### Java PathFinder (JPF)
+
+* Code-level model checker for Java programs
+* Two main components
+  * Search Engine (Pluggable)
+  * Dedicated JVM for state management and backtracking
+
+### Symbolic PathFinder (SPF)
+
+* An extension to JPF
+* Symbolic execution
+
+
+---
+
+## In the Next Lecture
+
+* LTL model checking in JPF
+  * ABP again, code level this time
+  * Fairness and Liveness Properties
